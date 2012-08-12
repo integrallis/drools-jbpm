@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<definitions id="Definition"
+             targetNamespace="http://www.jboss.org/drools"
+             typeLanguage="http://www.java.com/javaTypes"
+             expressionLanguage="http://www.mvel.org/2.0"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"
+             xmlns:g="http://www.jboss.org/drools/flow/gpd"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:tns="http://www.jboss.org/drools">
+
+  <process processType="Private" isExecutable="true" id="org.integrallis.drools.flows.sample" name="flow" tns:packageName="org.integrallis.drools.flows" >
+
+    <!-- nodes -->
+    <startEvent id="_1" name="StartProcess" />
+    <endEvent id="_2" name="End" >
+        <terminateEventDefinition/>
+    </endEvent>
+    <inclusiveGateway id="_3" name="Gateway" gatewayDirection="Diverging" />
+    <businessRuleTask id="_4" name="Decision" g:ruleFlowGroup="decision" >
+    </businessRuleTask>
+    <businessRuleTask id="_5" name="Process One" g:ruleFlowGroup="group1" >
+    </businessRuleTask>
+    <businessRuleTask id="_6" name="Process Two" g:ruleFlowGroup="group2" >
+    </businessRuleTask>
+    <endEvent id="_7" name="End" >
+        <terminateEventDefinition/>
+    </endEvent>
+    <scriptTask id="_8" name="Script" >
+      <script>System.out.println("Welcome to the your sample");</script>
+    </scriptTask>
+
+    <!-- connections -->
+    <sequenceFlow id="_6-_2" sourceRef="_6" targetRef="_2" />
+    <sequenceFlow id="_4-_3" sourceRef="_4" targetRef="_3" />
+    <sequenceFlow id="_8-_4" sourceRef="_8" targetRef="_4" />
+    <sequenceFlow id="_3-_5" sourceRef="_3" targetRef="_5" name="constraint" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" language="http://www.jboss.org/drools/rule" >SomeObject( someValue == "Process One" )</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_3-_6" sourceRef="_3" targetRef="_6" name="constraint" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" language="http://www.jboss.org/drools/rule" >SomeObject( someValue == "Process Two" )</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_5-_7" sourceRef="_5" targetRef="_7" />
+    <sequenceFlow id="_1-_8" sourceRef="_1" targetRef="_8" />
+
+  </process>
+
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="org.integrallis.drools.flows.sample" >
+      <bpmndi:BPMNShape bpmnElement="_1" >
+        <dc:Bounds x="408" y="9" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_2" >
+        <dc:Bounds x="617" y="371" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_3" >
+        <dc:Bounds x="411" y="222" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_4" >
+        <dc:Bounds x="391" y="100" width="80" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_5" >
+        <dc:Bounds x="215" y="263" width="80" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_6" >
+        <dc:Bounds x="593" y="271" width="80" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_7" >
+        <dc:Bounds x="233" y="376" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_8" >
+        <dc:Bounds x="230" y="111" width="80" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_6-_2" >
+        <di:waypoint x="633" y="295" />
+        <di:waypoint x="641" y="395" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_4-_3" >
+        <di:waypoint x="431" y="124" />
+        <di:waypoint x="435" y="246" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_8-_4" >
+        <di:waypoint x="270" y="135" />
+        <di:waypoint x="431" y="124" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_3-_5" >
+        <di:waypoint x="435" y="246" />
+        <di:waypoint x="255" y="287" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_3-_6" >
+        <di:waypoint x="435" y="246" />
+        <di:waypoint x="633" y="295" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_5-_7" >
+        <di:waypoint x="255" y="287" />
+        <di:waypoint x="257" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_1-_8" >
+        <di:waypoint x="432" y="33" />
+        <di:waypoint x="270" y="135" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+
+</definitions>
