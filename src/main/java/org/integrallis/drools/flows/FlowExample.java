@@ -47,6 +47,7 @@ public class FlowExample {
 			// 5 - start a new process instance
 			knowledgeSession.startProcess("org.integrallis.drools.flows.sample");
 			
+			// 6 - fire the rules
 			knowledgeSession.fireAllRules();
 			
 			logger.close();
