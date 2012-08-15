@@ -40,9 +40,12 @@ public class FlowExample {
 			KnowledgeRuntimeLogger logger = KnowledgeRuntimeLoggerFactory.newFileLogger(knowledgeSession, "test");
 
 			// 4 - create and assert some facts
-			SomeOtherObject trigger = new SomeOtherObject("bar");
+			SomeOtherObject trigger = new SomeOtherObject("foo");
+			SomeOtherObject trigger2 = new SomeOtherObject("bar");
 			
-			knowledgeSession.insert(trigger);
+			//knowledgeSession.insert(trigger);
+			//knowledgeSession.insert(trigger2);
+			
 			
 			// 5 - start a new process instance
 			knowledgeSession.startProcess("org.integrallis.drools.flows.sample");
