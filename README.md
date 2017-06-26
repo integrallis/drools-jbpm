@@ -1,7 +1,7 @@
 drools-jbpm
 ===========
 
-Example using Drools jBPM5 - Integrating Rules and Processes
+Example using Drools jBPM - Integrating Rules and Processes
 
 This material is copyrighted by Integrallis Software, LLC. 
 
